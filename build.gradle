@@ -43,7 +43,9 @@ dependencies {
     runtimeOnly 'com.h2database:h2:1.4.200'
     implementation 'org.flywaydb:flyway-core'
 
-
+    //lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 application {
