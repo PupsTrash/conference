@@ -1,15 +1,11 @@
 package conference.controller;
 
+import conference.controller.api.AddScheduleRequest;
 import conference.controller.api.ScheduleAddResponse;
-import conference.db.Room;
-import conference.db.Schedule;
-import conference.db.Talk;
-import conference.service.ScheduleControllerService;
+import conference.controller.api.ScheduleGetResponse;
+import conference.service.schedule.ScheduleControllerService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/lecture")
