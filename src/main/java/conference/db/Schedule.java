@@ -20,11 +20,14 @@ public class Schedule {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "talk_id")
-    private Talk scheduleTalk;
+    private Talk talk;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id")
-    private Room scheduleRoom;
+    private Room room;
+
+    private LocalDateTime startAt;
+    private LocalDateTime finishAt;
 
     @CreationTimestamp
     private LocalDateTime created_at;

@@ -30,7 +30,7 @@ private final ScheduleRepo scheduleRepo;
     @GetMapping("/room")
     public String room(){
         Room room = new Room();
-        room.setNumber(1);
+        room.setNumber("1");
         roomRepo.save(room);
         return "check this shit fuck";
 
