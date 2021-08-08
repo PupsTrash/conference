@@ -1,15 +1,17 @@
 package conference.db;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "talk")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Talk {
     @Id
@@ -20,9 +22,9 @@ public class Talk {
 
     private String title;
     private String description;
-    private Timestamp start_at;
-    private Timestamp finish_at;
+    private LocalDateTime start_at;
+    private LocalDateTime finish_at;
 
     @CreationTimestamp
-    private Timestamp created_at;
+    private LocalDateTime created_at;
 }

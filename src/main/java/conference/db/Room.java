@@ -1,14 +1,16 @@
 package conference.db;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "room")
 public class Room {
@@ -22,5 +24,5 @@ public class Room {
     private Integer number;
 
     @CreationTimestamp
-    private Timestamp created_at;
+    private LocalDateTime created_at;
 }

@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -21,17 +22,16 @@ public class ListLecture {
     private final TalkRepo talkRepo;
 
     @GetMapping("/lecture")
-    public Iterable<Schedule> allSchedule() {
-        Iterable<Schedule> scheduleRepoAll = scheduleRepo.findAll();
-
+    public List<Schedule> allSchedule() {
+        List<Schedule> scheduleRepoAll = scheduleRepo.findAll();
         return scheduleRepoAll;
     }
 
     @PostMapping("/lecture")
-    public Iterable<Schedule> addSchedule(@RequestParam(name = "title") String title,
+    public List<Schedule> addSchedule(@RequestParam(name = "title") String title,
                                       @RequestParam(name = "description") String description,
-                                      @RequestParam(name = "start_at", required = false) Timestamp startAt,
-                                      @RequestParam(name = "finish_at", required = false) Timestamp finishAt,
+                                      @RequestParam(name = "start_at", required = false) LocalDateTime startAt,
+                                      @RequestParam(name = "finish_at", required = false) LocalDateTime finishAt,
                                       @RequestParam(name = "room_id") Integer roomNumber
                                       ) {
         Talk talk = new Talk();
@@ -47,7 +47,7 @@ public class ListLecture {
         schedule.setScheduleTalk(talk);
         schedule.setScheduleRoom(room);
         scheduleRepo.save(schedule);
-
-        return scheduleRepo.findAll();
+        final List<Schedule> all = scheduleRepo.findAll();
+        return all;
     }
 }

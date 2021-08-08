@@ -2,7 +2,6 @@ package conference.controller;
 
 import conference.db.Room;
 import conference.db.Schedule;
-import conference.db.Talk;
 import conference.repositories.RoomRepo;
 import conference.repositories.ScheduleRepo;
 import conference.repositories.TalkRepo;
@@ -10,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
