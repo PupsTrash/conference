@@ -18,6 +18,7 @@ public class ScheduleControllerService {
     private final ScheduleMapper mapper;
     private final TalkRepo talkRepo;
     private final RoomRepo roomRepo;
+    private final ScheduleValidator scheduleValidator;
 
     public ScheduleGetResponse getAllSchedules() {
         var scheduleList = scheduleRepo.findAll();
@@ -25,42 +26,40 @@ public class ScheduleControllerService {
     }
 
     public ScheduleAddResponse addSchedule(AddScheduleRequest request) {
-        final var talk = talkRepo.findById(request.getTalkId()).orElseThrow();
-        final var room = roomRepo.findById(request.getRoomId()).orElseThrow();
 
-        final var schedule = new Schedule();
-        schedule.setStartAt(request.getStartAt());
-        schedule.setFinishAt(request.getFinishAt());
-        schedule.setTalk(talk);
-        schedule.setRoom(room);
+//        final var talk = talkRepo.findById(request.getTalkId()).orElseThrow();
+//        final var room = roomRepo.findById(request.getRoomId()).orElseThrow();
 
-
+        var sch = mapper.toEntity(request);
+//        final var schedule = new Schedule();
+//        schedule.setStartAt(request.getStartAt());
+//        schedule.setFinishAt(request.getFinishAt());
+//        schedule.setTalk(talk);
+//        schedule.setRoom(room);
         //
-        var shedules = scheduleRepo.findSchedulesByRoom(room);
-        boolean isDateValid = false;
-
+        var shedules = scheduleRepo.findSchedulesByRoom(sch.getRoom());
+//        boolean isDateValid = false;
         for (Schedule item :shedules) {
-            var isStartValid = !(request.getStartAt().isAfter(item.getStartAt()) && request.getStartAt().isBefore(item.getFinishAt()));
-            var isFinishValid = !(request.getFinishAt().isAfter(item.getStartAt()) && request.getFinishAt().isBefore(item.getFinishAt()));
-
-            if (isStartValid && isFinishValid) {
-                isDateValid = true;
-                break;
+//            var isStartValid = !(request.getStartAt().isAfter(item.getStartAt()) && request.getStartAt().isBefore(item.getFinishAt()));
+//            var isFinishValid = !(request.getFinishAt().isAfter(item.getStartAt()) && request.getFinishAt().isBefore(item.getFinishAt()));
+            if (!scheduleValidator.isScheduleValid(item, sch)) {
+                throw new RuntimeException();
+//                break;
             }
         }
 
-        if (!isDateValid) return null;
-
-        var savedSchedule = scheduleRepo.save(schedule);
-        final var response = new ScheduleAddResponse();
-        response.setDescription(schedule.getTalk().getDescription());
-        response.setTitle(schedule.getTalk().getTitle());
-        response.setStartAt(schedule.getStartAt());
-        response.setFinishAt(schedule.getFinishAt());
-        response.setRoomNumber(savedSchedule.getRoom().getNumber());
-
-
-        return response;
+//        if (!isDateValid) return null;
+        var savedSchedule = scheduleRepo.save(sch);
+//        final var response = new ScheduleAddResponse();
+//        response.setDescription(schedule.getTalk().getDescription());
+//        response.setTitle(schedule.getTalk().getTitle());
+//        response.setStartAt(schedule.getStartAt());
+//        response.setFinishAt(schedule.getFinishAt());
+//        response.setRoomNumber(savedSchedule.getRoom().getNumber());
+//
+//
+//        return response;
+        return mapper.toAddResponses(savedSchedule);
     }
 
     public ScheduleGetResponse getScheduleByRoom(String number){

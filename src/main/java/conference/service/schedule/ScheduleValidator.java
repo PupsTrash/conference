@@ -1,7 +1,9 @@
-package conference.service;
+package conference.service.schedule;
 
 import conference.db.Schedule;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ScheduleValidator {
 
     public Boolean isScheduleValid(Schedule item, Schedule request) {

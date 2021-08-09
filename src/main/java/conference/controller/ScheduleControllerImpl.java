@@ -5,10 +5,11 @@ import conference.controller.api.ScheduleAddResponse;
 import conference.controller.api.ScheduleGetResponse;
 import conference.service.schedule.ScheduleControllerService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
 @AllArgsConstructor
 public class ScheduleControllerImpl implements ScheduleControllerApi {
 
@@ -21,12 +22,12 @@ public class ScheduleControllerImpl implements ScheduleControllerApi {
         return service.getAllSchedules();
     }
 
-    @GetMapping("/byRoom")
-    public ScheduleGetResponse getSchedulesByRoom(@RequestParam String number){
+    @Override
+    public ScheduleGetResponse getSchedulesByRoom(@RequestParam String number) {
         return service.getScheduleByRoom(number);
     }
 
-    @PostMapping
+    @Override
     public ScheduleAddResponse addSchedule(@RequestBody AddScheduleRequest request) {
         return service.addSchedule(request);
     }
