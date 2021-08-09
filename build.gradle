@@ -30,9 +30,9 @@ dependencies {
 
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
-
-    // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     //Spring
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -49,11 +49,20 @@ dependencies {
 
     //devtools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    //
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+    //swagger
+    implementation 'org.springdoc:springdoc-openapi-ui:1.5.10'
+
 }
 
 application {
     // Define the main class for the application.
-    mainClassName = 'conference.App'
+    mainClassName = 'conference.Application'
 }
 
 test {

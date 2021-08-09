@@ -22,7 +22,7 @@ public class Room {
     @Column(name = "id")
     private Long id;
 
-    private Integer number;
+    private String number;
 
     @CreationTimestamp
     private OffsetDateTime created_at;

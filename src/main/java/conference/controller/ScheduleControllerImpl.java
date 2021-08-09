@@ -8,17 +8,27 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/lecture")
+
 @AllArgsConstructor
-public class ListLecture {
+public class ScheduleControllerImpl implements ScheduleControllerApi {
 
     private final ScheduleControllerService service;
 //    private final ScheduleRepo scheduleRepo;
 //    private final TalkRepo talkRepo;
 
-    @GetMapping
-    public ScheduleAddResponse getAllSchedules() {
+    @Override
+    public ScheduleGetResponse getAllSchedules() {
         return service.getAllSchedules();
+    }
+
+    @GetMapping("/byRoom")
+    public ScheduleGetResponse getSchedulesByRoom(@RequestParam String number){
+        return service.getScheduleByRoom(number);
+    }
+
+    @PostMapping
+    public ScheduleAddResponse addSchedule(@RequestBody AddScheduleRequest request) {
+        return service.addSchedule(request);
     }
 
 //    @PostMapping

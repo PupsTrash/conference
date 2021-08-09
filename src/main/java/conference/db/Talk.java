@@ -23,9 +23,8 @@ public class Talk {
 
     private String title;
     private String description;
-    private LocalDateTime start_at;
-    private LocalDateTime finish_at;
+
 
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private OffsetDateTime createdAt;
 }
