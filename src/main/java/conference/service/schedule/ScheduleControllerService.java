@@ -21,4 +21,9 @@ public class ScheduleControllerService {
     public ScheduleAddResponse addSchedule(AddScheduleRequest request) {
         
     }
+
+    public ScheduleGetResponse getScheduleByRoom(String number){
+        var byRoom = scheduleRepo.findSchedulesByRoom_NumberOrderByStartAt(number);
+        return new ScheduleGetResponse(mapper.toResponse(byRoom));
+    }
 }

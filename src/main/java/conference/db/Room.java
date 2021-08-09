@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 @Getter
@@ -24,5 +25,5 @@ public class Room {
     private Integer number;
 
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private OffsetDateTime created_at;
 }
