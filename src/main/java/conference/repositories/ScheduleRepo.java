@@ -11,4 +11,5 @@ import java.util.List;
 public interface ScheduleRepo extends JpaRepository<Schedule, Long> {
     List<Schedule> findSchedulesByRoom_NumberOrderByStartAt(String room_number);
     List<Schedule> findSchedulesByRoom(Room room);
+
 }

@@ -14,4 +14,5 @@ public interface TalkControllerApi {
     @PostMapping
     TalkAddResponse addTalk(@RequestBody TalkAddRequest request);
 
+
 }

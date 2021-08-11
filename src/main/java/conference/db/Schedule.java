@@ -23,7 +23,7 @@ public class Schedule {
     @JoinColumn(name = "talk_id")
     private Talk talk;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "room_id")
     private Room room;
 
