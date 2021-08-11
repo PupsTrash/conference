@@ -1,22 +1,27 @@
 package conference.controller.api;
 
+import conference.validation.constraints.ScheduleTimetableValidation;
+import conference.validation.constraints.Secondary;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
+@ScheduleTimetableValidation(groups = {Secondary.class})
 public class AddScheduleRequest {
-    @Schema(example = "2021-01-31T11:01:55")
+
+    @NotNull
     private LocalDateTime startAt;
 
-    @Schema(example = "2021-01-31T12:30:01")
+    @NotNull
     private LocalDateTime finishAt;
 
-    @Schema(example = "1")
+    @NotNull
     private Long roomId;
 
-    @Schema(example = "1")
+    @NotNull
     private Long talkId;
 
 }

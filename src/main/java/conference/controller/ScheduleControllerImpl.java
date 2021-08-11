@@ -4,18 +4,28 @@ import conference.controller.api.AddScheduleRequest;
 import conference.controller.api.ScheduleAddResponse;
 import conference.controller.api.ScheduleGetResponse;
 import conference.service.schedule.ScheduleControllerService;
+import conference.validation.constraints.Primary;
+import conference.validation.constraints.ScheduleTimetableValidator;
+import conference.validation.constraints.Secondary;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @AllArgsConstructor
+@Validated({Secondary.class})
 public class ScheduleControllerImpl implements ScheduleControllerApi {
 
     private final ScheduleControllerService service;
 //    private final ScheduleRepo scheduleRepo;
 //    private final TalkRepo talkRepo;
+
 
     @Override
     public ScheduleGetResponse getAllSchedules() {
@@ -28,7 +38,7 @@ public class ScheduleControllerImpl implements ScheduleControllerApi {
     }
 
     @Override
-    public ScheduleAddResponse addSchedule(@RequestBody AddScheduleRequest request) {
+    public ScheduleAddResponse addSchedule(@Validated AddScheduleRequest request) {
         return service.addSchedule(request);
     }
 
