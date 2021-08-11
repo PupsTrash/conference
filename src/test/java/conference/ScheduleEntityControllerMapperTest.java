@@ -1,9 +1,9 @@
 package conference;
 
 import conference.controller.api.ScheduleResponseDto;
-import conference.db.Room;
-import conference.db.Schedule;
-import conference.db.Talk;
+import conference.db.RoomEntity;
+import conference.db.ScheduleEntity;
+import conference.db.TalkEntity;
 import conference.service.schedule.ScheduleMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {ScheduleControllerMapperTest.Config.class})
-public class ScheduleControllerMapperTest {
+@ContextConfiguration(classes = {ScheduleEntityControllerMapperTest.Config.class})
+public class ScheduleEntityControllerMapperTest {
 
     @Autowired
     private ScheduleMapper mapperTest;
@@ -45,24 +45,24 @@ public class ScheduleControllerMapperTest {
         return new ScheduleResponseDto(startAt, finishAt, title, talkDescription, talkRoomNumber);
     }
 
-    private Schedule buildSchedule(Talk talk, String roomNumber, LocalDateTime startAt, LocalDateTime finishAt) {
+    private ScheduleEntity buildSchedule(TalkEntity talkEntity, String roomNumber, LocalDateTime startAt, LocalDateTime finishAt) {
 
-        var schedule = new Schedule();
-        var room = new Room();
+        var schedule = new ScheduleEntity();
+        var room = new RoomEntity();
 
         room.setNumber(roomNumber);
 
-        schedule.setTalk(talk);
-        schedule.setRoom(room);
+        schedule.setTalkEntity(talkEntity);
+        schedule.setRoomEntity(room);
         schedule.setStartAt(startAt);
         schedule.setFinishAt(finishAt);
 
         return schedule;
     }
 
-    private Talk buildTalk(String title, String talkDescription) {
+    private TalkEntity buildTalk(String title, String talkDescription) {
 
-        var talk = new Talk();
+        var talk = new TalkEntity();
         talk.setTitle(title);
         talk.setDescription(talkDescription);
 

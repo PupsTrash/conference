@@ -3,8 +3,7 @@ package conference.service.schedule;
 import conference.controller.api.AddScheduleRequest;
 import conference.controller.api.ScheduleAddResponse;
 import conference.controller.api.ScheduleGetResponse;
-import conference.db.Room;
-import conference.db.Schedule;
+import conference.db.ScheduleEntity;
 import conference.repositories.RoomRepo;
 import conference.repositories.ScheduleRepo;
 import conference.repositories.TalkRepo;
@@ -27,29 +26,29 @@ public class ScheduleControllerService {
 
     public ScheduleAddResponse addSchedule(AddScheduleRequest request) {
 
-//        final var talk = talkRepo.findById(request.getTalkId()).orElseThrow();
-//        final var room = roomRepo.findById(request.getRoomId()).orElseThrow();
+        final var talk = talkRepo.findById(request.getTalkId()).orElseThrow();
+        final var room = roomRepo.findById(request.getRoomId()).orElseThrow();
 
-        var sch = mapper.toEntity(request);
-//        final var schedule = new Schedule();
-//        schedule.setStartAt(request.getStartAt());
-//        schedule.setFinishAt(request.getFinishAt());
-//        schedule.setTalk(talk);
-//        schedule.setRoom(room);
+
+        final var schedule = new ScheduleEntity();
+        schedule.setStartAt(request.getStartAt());
+        schedule.setFinishAt(request.getFinishAt());
+        schedule.setTalkEntity(talk);
+        schedule.setRoomEntity(room);
         //
-        var shedules = scheduleRepo.findSchedulesByRoom(sch.getRoom());
+        var shedules = scheduleRepo.findScheduleEntityByRoomEntity(room);
 //        boolean isDateValid = false;
-        for (Schedule item :shedules) {
+        for (ScheduleEntity item :shedules) {
 //            var isStartValid = !(request.getStartAt().isAfter(item.getStartAt()) && request.getStartAt().isBefore(item.getFinishAt()));
 //            var isFinishValid = !(request.getFinishAt().isAfter(item.getStartAt()) && request.getFinishAt().isBefore(item.getFinishAt()));
-            if (!scheduleValidator.isScheduleValid(item, sch)) {
+            if (!scheduleValidator.isScheduleValid(item, schedule)) {
                 throw new RuntimeException();
 //                break;
             }
         }
 
 //        if (!isDateValid) return null;
-        var savedSchedule = scheduleRepo.save(sch);
+        var savedSchedule = scheduleRepo.save(schedule);
 //        final var response = new ScheduleAddResponse();
 //        response.setDescription(schedule.getTalk().getDescription());
 //        response.setTitle(schedule.getTalk().getTitle());
@@ -63,7 +62,7 @@ public class ScheduleControllerService {
     }
 
     public ScheduleGetResponse getScheduleByRoom(String number){
-        var byRoom = scheduleRepo.findSchedulesByRoom_NumberOrderByStartAt(number);
+        var byRoom = scheduleRepo.findScheduleEntityByRoomEntity_NumberOrderByStartAt(number);
         return new ScheduleGetResponse(mapper.toResponse(byRoom));
     }
 }

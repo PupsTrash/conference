@@ -1,7 +1,7 @@
 package conference.service.room;
 
 import conference.controller.api.RoomDto;
-import conference.db.Room;
+import conference.db.RoomEntity;
 import conference.repositories.RoomRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class RoomControllerService {
         return mapper.toResponse(roomRepo.findAll());
     }
 
-    public Room getRoomById(Long id){
+    public RoomEntity getRoomById(Long id){
         return roomRepo.getById(id);
     }
 }

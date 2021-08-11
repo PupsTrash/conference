@@ -1,7 +1,7 @@
 package conference.validation.constraints;
 
 import conference.controller.api.AddScheduleRequest;
-import conference.db.Schedule;
+import conference.db.ScheduleEntity;
 import conference.repositories.RoomRepo;
 import conference.repositories.ScheduleRepo;
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ public class ScheduleTimetableValidator implements ConstraintValidator<ScheduleT
         if (value == null) return false;
 
         final var room = roomRepo.findById(value.getRoomId()).orElseThrow();
-        final var list = scheduleRepo.findSchedulesByRoom(room);
+        final var list = scheduleRepo.findScheduleEntityByRoomEntity(room);
 
         final var validatorRequest = new ScheduleRequestInternal(value.getStartAt(), value.getFinishAt());
 
@@ -38,7 +38,7 @@ public class ScheduleTimetableValidator implements ConstraintValidator<ScheduleT
         private LocalDateTime finishAt;
     }
 
-    private Boolean isScheduleValid(Schedule item, ScheduleRequestInternal request) {
+    private Boolean isScheduleValid(ScheduleEntity item, ScheduleRequestInternal request) {
         var isStartValid = !(request.getStartAt().isAfter(item.getStartAt()) && request.getStartAt().isBefore(item.getFinishAt()));
         var isFinishValid = !(request.getFinishAt().isAfter(item.getStartAt()) && request.getFinishAt().isBefore(item.getFinishAt()));
         var isBothValid = !(request.getStartAt().isBefore(item.getStartAt()) && request.getFinishAt().isAfter(item.getFinishAt()));

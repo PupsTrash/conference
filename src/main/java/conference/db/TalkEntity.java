@@ -10,20 +10,21 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Entity
+@Table(name = "talk")
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "room")
-public class Room {
-
+public class TalkEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROOM_GEN")
-    @SequenceGenerator(name = "ROOM_GEN", sequenceName = "room_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TALK_GEN")
+    @SequenceGenerator(name = "TALK_GEN", sequenceName = "talk_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
-    private String number;
+    private String title;
+    private String description;
+
 
     @CreationTimestamp
-    private OffsetDateTime created_at;
+    private OffsetDateTime createdAt;
 }

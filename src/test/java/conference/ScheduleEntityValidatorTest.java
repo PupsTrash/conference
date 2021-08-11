@@ -1,6 +1,6 @@
 package conference;
 
-import conference.db.Schedule;
+import conference.db.ScheduleEntity;
 import conference.service.schedule.ScheduleValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.stream.Stream;
 
-public class ScheduleValidatorTest {
+public class ScheduleEntityValidatorTest {
 
     private final ScheduleValidator validator = new ScheduleValidator();
 
@@ -20,8 +20,8 @@ public class ScheduleValidatorTest {
     @ParameterizedTest
     @MethodSource(value = "invalidSources")
     public void invalidDatesTest(LocalDateTime start, LocalDateTime finish) {
-        var item = new Schedule();
-        var request = new Schedule();
+        var item = new ScheduleEntity();
+        var request = new ScheduleEntity();
 
         item.setStartAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 0)));
         item.setFinishAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0)));
@@ -36,8 +36,8 @@ public class ScheduleValidatorTest {
     @ParameterizedTest
     @MethodSource(value = "validSources")
     public void validDatesTest(LocalDateTime start, LocalDateTime finish) {
-        var item = new Schedule();
-        var request = new Schedule();
+        var item = new ScheduleEntity();
+        var request = new ScheduleEntity();
 
         item.setStartAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 0)));
         item.setFinishAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0)));
