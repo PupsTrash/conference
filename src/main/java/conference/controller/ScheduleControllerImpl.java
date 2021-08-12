@@ -38,7 +38,7 @@ public class ScheduleControllerImpl implements ScheduleControllerApi {
     }
 
     @Override
-    public ScheduleAddResponse addSchedule(@Validated AddScheduleRequest request) {
+    public ScheduleAddResponse addSchedule(AddScheduleRequest request) {
         return service.addSchedule(request);
     }
 

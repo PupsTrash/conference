@@ -28,7 +28,7 @@ public class ScheduleTimetableValidator implements ConstraintValidator<ScheduleT
 
         final var validatorRequest = new ScheduleRequestInternal(value.getStartAt(), value.getFinishAt());
 
-        return list.stream().anyMatch(item -> isScheduleValid(item, validatorRequest));
+        return list.stream().allMatch(item -> isScheduleValid(item, validatorRequest));
     }
 
     @Data

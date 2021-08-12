@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,21 @@ public class ValidationErrorHandler {
         var err = ex.getBindingResult().getFieldErrors().stream().map(
                 it -> new ErrorValid(it.getField(), it.getDefaultMessage()))
                 .collect(Collectors.toList());
+
+        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<List<ErrorValid>> handleViolationError(ConstraintViolationException ex) {
+
+        var err = ex.getConstraintViolations().stream()
+                .map(it -> new ErrorValid(it.getPropertyPath().toString(), it.getMessage()))
+                .collect(Collectors.toList());
+
+//        var err = ex.getBindingResult().getFieldErrors().stream().map(
+//                it -> new ErrorValid(it.getField(), it.getDefaultMessage()))
+//                .collect(Collectors.toList());
 
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }

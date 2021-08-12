@@ -63,6 +63,9 @@ dependencies {
     //swagger
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.10'
 
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.4'
+
+
 }
 
 application {
