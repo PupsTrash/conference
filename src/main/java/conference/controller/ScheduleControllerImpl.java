@@ -8,6 +8,7 @@ import conference.validation.constraints.Primary;
 import conference.validation.constraints.ScheduleTimetableValidator;
 import conference.validation.constraints.Secondary;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
