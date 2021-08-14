@@ -28,7 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
                 .antMatchers("/api/v1/registration/**").permitAll()
-                .antMatchers("/schedule").hasRole("LISTENER")
+                .antMatchers("/schedule").hasRole("SPEAKER")
+
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/talk").hasRole("SPEAKER")
+                .antMatchers("/room").hasRole("SPEAKER")
+                .antMatchers("/main").permitAll()
         .anyRequest().hasRole("ADMIN");
         http.httpBasic();
         http.csrf().disable();

@@ -11,40 +11,21 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.Validator;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 public class ScheduleTimetableValidator implements ConstraintValidator<ScheduleTimetableValidation, AddScheduleRequest> {
 
-    private final ScheduleRepo scheduleRepo;
-    private final RoomRepo roomRepo;
+
     private final Validator validator;
+    private final List<CheckScheduleTimeRequest> requests;
 
     @Override
     public boolean isValid(AddScheduleRequest value, ConstraintValidatorContext ctx) {
         if (value == null) return false;
 
-        final var room = roomRepo.findById(value.getRoomId()).orElseThrow();
-        final var list = scheduleRepo.findScheduleEntityByRoomEntity(room);
-
-        final var validatorRequest = new ScheduleRequestInternal(value.getStartAt(), value.getFinishAt());
-
-        return list.stream().allMatch(item -> isScheduleValid(item, validatorRequest));
+        return requests.stream().allMatch(item -> item.isValidTime(value));
     }
 
-    @Data
-    @AllArgsConstructor
-    class ScheduleRequestInternal {
-        private LocalDateTime startAt;
-        private LocalDateTime finishAt;
-    }
 
-    private Boolean isScheduleValid(ScheduleEntity item, ScheduleRequestInternal request) {
-        var isStartValid = !(request.getStartAt().isAfter(item.getStartAt()) && request.getStartAt().isBefore(item.getFinishAt()));
-        var isFinishValid = !(request.getFinishAt().isAfter(item.getStartAt()) && request.getFinishAt().isBefore(item.getFinishAt()));
-        var isBothValid = !(request.getStartAt().isBefore(item.getStartAt()) && request.getFinishAt().isAfter(item.getFinishAt()));
-
-        var a = request.getStartAt().isAfter(item.getStartAt());
-
-        return isStartValid && isFinishValid && isBothValid;
-    }
 }

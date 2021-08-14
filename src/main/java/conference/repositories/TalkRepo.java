@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TalkRepo extends JpaRepository<TalkEntity, Long> {
-    List<TalkEntity> findAllByTitleNotNull();
+    TalkEntity findByTitleAndDescription(String title, String description);
 }

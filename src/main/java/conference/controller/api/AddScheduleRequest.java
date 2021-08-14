@@ -1,5 +1,7 @@
 package conference.controller.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import conference.validation.constraints.ScheduleTimetableValidation;
 import conference.validation.constraints.Secondary;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,11 +15,13 @@ import java.time.LocalDateTime;
 public class AddScheduleRequest {
 
     @NotNull
-    @Schema(example = "2021-01-31T11:01:55")
+    @Schema(example = "2021-08-07T15:05")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startAt;
 
     @NotNull
-    @Schema(example = "2021-01-31T12:30:01")
+    @Schema(example = "2021-08-07T16:05")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime finishAt;
 
     @NotNull

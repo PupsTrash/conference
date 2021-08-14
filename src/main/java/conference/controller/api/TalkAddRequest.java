@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
+//@Builder
 public class TalkAddRequest {
     @Schema(example = "JUG.ru java")
     private String title;

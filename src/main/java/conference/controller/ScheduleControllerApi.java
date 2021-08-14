@@ -22,4 +22,5 @@ public interface ScheduleControllerApi {
 
     @PostMapping
     ScheduleAddResponse addSchedule(@Valid @RequestBody AddScheduleRequest request);
+
 }

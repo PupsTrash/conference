@@ -2,18 +2,27 @@ package conference.service.talk;
 
 import conference.controller.api.TalkAddRequest;
 import conference.controller.api.TalkAddResponse;
-import conference.repositories.TalkRepo;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
-public class TalkControllerService {
-    private final TalkRepo talkRepo;
-    private final TalkControllerServiceMapper mapper;
+import java.util.List;
+/**
+ * main method`s Talk Service for Talk controller
+ */
+public interface TalkControllerService {
+    /**
+     * add new talk
+     */
+    TalkAddResponse addTalk(TalkAddRequest request);
 
-    public TalkAddResponse addTalk(TalkAddRequest request) {
 
-        return mapper.toResponse(talkRepo.save(mapper.toEntity(request)));
-    }
+    List<TalkAddResponse> getAllTalk();
+
+    /**
+     *
+     * @param title - title old talk
+     * @param description - description old tal
+     * @param newRequest - new data for talk
+     */
+    TalkAddResponse editTalk(String title, String description, TalkAddRequest newRequest);
+
+    public void deleteTalk(TalkAddRequest request);
 }
