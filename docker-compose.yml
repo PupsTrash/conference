@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  conference:
+    container_name: conference
+    build: .
+    environment:
+      JAVA_OPTS: " -Dserver.port=8082"
+    ports:
+      - 8082:8082
+
+# Use CMD/Terminal
+# `docker-compose build`
+# `docker-compose up`
