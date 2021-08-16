@@ -4,19 +4,11 @@ import conference.controller.api.AddScheduleRequest;
 import conference.controller.api.ScheduleAddResponse;
 import conference.controller.api.ScheduleGetResponse;
 import conference.service.schedule.ScheduleControllerService;
-import conference.validation.constraints.Primary;
-import conference.validation.constraints.ScheduleTimetableValidator;
 import conference.validation.constraints.Secondary;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
@@ -40,6 +32,11 @@ public class ScheduleControllerImpl implements ScheduleControllerApi {
 
     @Override
     public ScheduleAddResponse addSchedule(AddScheduleRequest request) {
+        return service.addSchedule(request);
+    }
+
+    @Override
+    public ScheduleAddResponse editSchedule(AddScheduleRequest request) {
         return service.addSchedule(request);
     }
 

@@ -14,7 +14,7 @@ CREATE SEQUENCE user_seq INCREMENT 1 START 1;
 create table PUBLIC.user (
     id      int8           default nextval('user_seq') not null,
     username   varchar(16) unique,
-    password   varchar(16),
+    password   varchar(100),
     created_at timestamp with time zone default current_timestamp,
 
     primary key (id)

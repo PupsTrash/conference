@@ -1,6 +1,7 @@
 package conference.validation.constraints;
 
 import conference.controller.api.AddScheduleRequest;
+import conference.controller.api.ScheduleResponseDto;
 import conference.db.ScheduleEntity;
 import conference.repositories.RoomRepo;
 import conference.repositories.ScheduleRepo;
@@ -9,12 +10,11 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class OverlapTimeCheckImpl implements CheckScheduleTimeRequest {
+public class OverlapTimeCheckImpl implements CheckAddScheduleRequestTime {
     private final ScheduleRepo scheduleRepo;
     private final RoomRepo roomRepo;
 
@@ -24,10 +24,12 @@ public class OverlapTimeCheckImpl implements CheckScheduleTimeRequest {
         final var list = scheduleRepo.findScheduleEntityByRoomEntity(room).stream().
                 filter(p -> p.getFinishAt().isEqual(value.getFinishAt())).collect(Collectors.toList());
 
+        list.removeIf(p -> p.getId() == value.getId());
+
+
         final var validatorRequest = new OverlapTimeCheckImpl.ScheduleRequestInternal(value.getStartAt(), value.getFinishAt());
         return list.stream().allMatch(item -> isScheduleValid(item, validatorRequest));
     }
-
 
 
 

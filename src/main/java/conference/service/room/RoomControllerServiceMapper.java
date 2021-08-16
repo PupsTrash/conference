@@ -12,6 +12,5 @@ public abstract class RoomControllerServiceMapper {
     public abstract List<RoomDto> toResponse(List<RoomEntity> roomEntityList);
 
     @Mapping(target = "numberRoom", source = "number")
-    @Mapping(target = "idRoom", source = "id")
     public abstract RoomDto toResponse(RoomEntity roomEntity);
 }

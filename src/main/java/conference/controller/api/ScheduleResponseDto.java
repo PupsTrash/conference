@@ -29,4 +29,7 @@ public class ScheduleResponseDto {
 
     @Schema(example = "122a")
     private String roomNumber;
+
+
+    private Long id;
 }

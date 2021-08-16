@@ -1,5 +1,6 @@
 package conference.controller;
 
+import conference.controller.api.AdminDto;
 import conference.db.UserEntity;
 import conference.service.admin.AdminControllerService;
 import lombok.AllArgsConstructor;
@@ -15,18 +16,18 @@ public class AdminControllerImpl implements AdminControllerApi {
 
 
     @Override
-    public UserEntity addUser(UserEntity user) {
+    public AdminDto addUser(AdminDto user) {
         return service.addUser(user);
     }
 
     @Override
-    public List<UserEntity> getAllUsers() {
+    public List<AdminDto> getAllUsers() {
         return service.getAllUsers();
     }
 
     @Override
-    public UserEntity editUser(Long id, UserEntity editData) {
-        return service.editUser(id, editData);
+    public AdminDto editUser(AdminDto editData) {
+        return service.editUser(editData);
     }
 
     @Override

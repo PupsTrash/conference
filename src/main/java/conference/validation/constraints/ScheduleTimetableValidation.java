@@ -1,5 +1,7 @@
 package conference.validation.constraints;
 
+import conference.service.schedule.Marker;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.constraints.NotNull;

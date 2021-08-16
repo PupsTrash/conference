@@ -9,5 +9,5 @@ public class RoomDto {
     private String numberRoom;
 
     @Schema(example = "1")
-    private Long idRoom;
+    private Long id;
 }

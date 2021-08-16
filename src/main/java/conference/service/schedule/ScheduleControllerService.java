@@ -1,24 +1,29 @@
 package conference.service.schedule;
 
-import conference.controller.api.AddScheduleRequest;
-import conference.controller.api.EditScheduleRequest;
-import conference.controller.api.ScheduleAddResponse;
-import conference.controller.api.ScheduleGetResponse;
+import conference.controller.api.*;
 import conference.db.ScheduleEntity;
 import conference.repositories.RoomRepo;
 import conference.repositories.ScheduleRepo;
 import conference.repositories.TalkRepo;
+import conference.validation.constraints.Primary;
+import conference.validation.constraints.ScheduleTimetableValidation;
+import conference.validation.constraints.Secondary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 @Service
+
 @RequiredArgsConstructor
 public class ScheduleControllerService {
     private final ScheduleRepo scheduleRepo;
     private final ScheduleMapper mapper;
     private final TalkRepo talkRepo;
     private final RoomRepo roomRepo;
-    private final ScheduleValidator scheduleValidator;
 
     public ScheduleGetResponse getAllSchedules() {
         var scheduleList = scheduleRepo.findAll();
@@ -26,7 +31,6 @@ public class ScheduleControllerService {
     }
 
     public ScheduleAddResponse addSchedule(AddScheduleRequest request) {
-//        откуда берется в AddScheduleRequest roomId, talkId??????
         final var talk = talkRepo.findById(request.getTalkId()).orElseThrow();
         final var room = roomRepo.findById(request.getRoomId()).orElseThrow();
 
@@ -44,8 +48,5 @@ public class ScheduleControllerService {
         return new ScheduleGetResponse(mapper.toResponse(byRoom));
     }
 
-    public ScheduleAddResponse editSchedule(EditScheduleRequest request) {
-//        смотри комент выше
-        return null;
-    }
+
 }

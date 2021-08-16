@@ -11,4 +11,6 @@ public class TalkAddResponse {
 
     @Schema(example = "Common description")
     private String description;
+
+    private Long id;
 }

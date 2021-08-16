@@ -36,13 +36,13 @@ public class ScheduleEntityControllerMapperTest {
         var talkRoomNumber = "122a";
 
         var schedule = buildSchedule(buildTalk(title,talkDescription), talkRoomNumber, startAt, finishAt);
-        var expected = buildScheduleResponseDto(title, startAt, finishAt, talkDescription, talkRoomNumber);
+        var expected = buildScheduleResponseDto(title, startAt, finishAt, talkDescription, talkRoomNumber, null);
 
         Assertions.assertEquals(expected, mapperTest.toResponse(schedule));
     }
 
-    private ScheduleResponseDto buildScheduleResponseDto(String title, LocalDateTime startAt, LocalDateTime finishAt, String talkDescription, String talkRoomNumber) {
-        return new ScheduleResponseDto(startAt, finishAt, title, talkDescription, talkRoomNumber);
+    private ScheduleResponseDto buildScheduleResponseDto(String title, LocalDateTime startAt, LocalDateTime finishAt, String talkDescription, String talkRoomNumber, Long id) {
+        return new ScheduleResponseDto(startAt, finishAt, title, talkDescription, talkRoomNumber, id);
     }
 
     private ScheduleEntity buildSchedule(TalkEntity talkEntity, String roomNumber, LocalDateTime startAt, LocalDateTime finishAt) {

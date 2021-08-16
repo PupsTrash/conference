@@ -1,5 +1,6 @@
 package conference.controller;
 
+import conference.controller.api.AdminDto;
 import conference.db.UserEntity;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,14 @@ import java.util.List;
 public interface AdminControllerApi {
 
     @PostMapping
-    UserEntity addUser(UserEntity user);
+    AdminDto addUser(@RequestBody AdminDto user);
 
     @GetMapping
-    List<UserEntity> getAllUsers();
+    List<AdminDto> getAllUsers();
 
     @PutMapping
-    UserEntity editUser(Long id, UserEntity editData);
+    AdminDto editUser(@RequestBody AdminDto editData);
 
     @DeleteMapping
-    void deleteUser(Long id);
+    void deleteUser(@RequestParam Long id);
 }

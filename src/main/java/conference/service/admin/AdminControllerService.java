@@ -1,19 +1,19 @@
 package conference.service.admin;
 
+import conference.controller.api.AdminDto;
 import conference.db.UserEntity;
 
 import java.util.List;
 
 public interface AdminControllerService {
 
-
-    UserEntity addUser(UserEntity user);
-
-
-    List<UserEntity> getAllUsers();
+    AdminDto addUser(AdminDto user);
 
 
-    UserEntity editUser(Long id, UserEntity editData);
+    List<AdminDto> getAllUsers();
+
+
+    AdminDto editUser(AdminDto editData);
 
     void deleteUser(Long id);
 }

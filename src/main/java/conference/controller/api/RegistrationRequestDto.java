@@ -6,10 +6,10 @@ import lombok.Data;
 public class RegistrationRequestDto {
     private String username;
     private String password;
-    private Role role;
+//    private Role role;
 
-    enum Role {
-        SPEAKER,
-        LISTENER,
-    }
+//    enum Role {
+//        SPEAKER,
+//        LISTENER,
+//    }
 }

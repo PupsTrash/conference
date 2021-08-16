@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -21,22 +23,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MyUserDetailService userDetailsService;
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 .antMatchers("/h2-console/*").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
                 .antMatchers("/api/v1/registration/**").permitAll()
-                .antMatchers("/schedule").hasRole("SPEAKER")
+                .antMatchers("/schedule").hasAnyRole("SPEAKER", "ADMIN")
+
 
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/talk").hasRole("SPEAKER")
-                .antMatchers("/room").hasRole("SPEAKER")
-                .antMatchers("/main").permitAll()
-        .anyRequest().hasRole("ADMIN");
+                .antMatchers("/talk").hasAnyRole("SPEAKER", "ADMIN")
+                .antMatchers("/room").hasAnyRole("SPEAKER", "ADMIN")
+                .antMatchers("/main").permitAll();
+        http.authorizeRequests().anyRequest().hasRole("ADMIN"); //не работает лол
+
         http.httpBasic();
         http.csrf().disable();
+
+    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder  auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .passwordEncoder(getPasswordEncoder())
+                .withUser("admin").password(getPasswordEncoder().encode("1")).roles("ADMIN")
+                .and()
+                .withUser("spk").password(getPasswordEncoder().encode("2")).roles("SPEAKER")
+                .and()
+                .withUser("lis").password(getPasswordEncoder().encode("3")).roles("LISTENER");
+
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(getPasswordEncoder());
+
     }
 
     @Override
@@ -51,6 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setPasswordEncoder(getPasswordEncoder());
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
 
+
+
         return daoAuthenticationProvider;
     }
 
@@ -62,6 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     protected PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
 }
