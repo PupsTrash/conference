@@ -1,12 +1,9 @@
 package conference.service;
 
 import conference.controller.api.RegistrationRequestDto;
-import conference.db.RoleEntity;
 import conference.db.UserEntity;
-import conference.db.UserRoleEntity;
 import conference.repositories.RoleRepository;
 import conference.repositories.UserRepository;
-import conference.repositories.UserRoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class RegistrationService {
+    private final PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
 
     public void register(RegistrationRequestDto request) {
         var user = new UserEntity();

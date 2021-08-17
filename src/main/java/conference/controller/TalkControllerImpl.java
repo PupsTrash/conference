@@ -26,8 +26,8 @@ public class TalkControllerImpl implements TalkControllerApi {
     }
 
     @Override
-    public TalkAddResponse editTalk(String title, String description, TalkAddRequest newRequest) {
-        return service.editTalk(title,description,newRequest);
+    public TalkAddResponse editTalk(TalkAddRequest request) {
+        return service.editTalk(request);
     }
 
 

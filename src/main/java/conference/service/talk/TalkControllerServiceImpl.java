@@ -20,18 +20,18 @@ public class TalkControllerServiceImpl implements TalkControllerService {
         return mapper.toResponse(talkRepo.save(mapper.toEntity(request)));
     }
 
-    public List<TalkAddResponse> getAllTalk(){
+    public List<TalkAddResponse> getAllTalk() {
         return mapper.toResponse(talkRepo.findAll());
     }
 
-    public TalkAddResponse editTalk(String title, String description, TalkAddRequest newRequest){
-        final TalkEntity entity = talkRepo.findByTitleAndDescription(title, description);
-        entity.setDescription(newRequest.getDescription());
-        entity.setTitle(newRequest.getTitle());
+    public TalkAddResponse editTalk(TalkAddRequest request) {
+        final TalkEntity entity = talkRepo.findById(request.getId()).orElseThrow();
+        entity.setDescription(request.getDescription());
+        entity.setTitle(request.getTitle());
         return mapper.toResponse(talkRepo.save(entity));
     }
 
-    public void deleteTalk(TalkAddRequest request){
-        talkRepo.delete(talkRepo.findByTitleAndDescription(request.getTitle(), request.getDescription()));
+    public void deleteTalk(TalkAddRequest request) {
+        talkRepo.delete(talkRepo.findById(request.getId()).orElseThrow());
     }
 }

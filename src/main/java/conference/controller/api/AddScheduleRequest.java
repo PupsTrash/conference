@@ -1,7 +1,6 @@
 package conference.controller.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import conference.service.schedule.Marker;
 import conference.validation.constraints.ScheduleTimetableValidation;
 import conference.validation.constraints.Secondary;

@@ -1,13 +1,12 @@
 package conference.service.schedule;
 
-import conference.validation.constraints.ScheduleTimetableValidation;
-
-import javax.validation.GroupSequence;
-import javax.validation.groups.Default;
-
-
+/**
+ * marker interface for separation validation logic
+ */
 public interface Marker {
-    interface OnCreate {}
+    interface OnCreate {
+    }
 
-    interface OnUpdate {}
+    interface OnUpdate {
+    }
 }

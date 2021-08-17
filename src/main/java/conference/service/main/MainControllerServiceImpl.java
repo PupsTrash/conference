@@ -1,7 +1,6 @@
 package conference.service.main;
 
 import conference.controller.api.ScheduleGetResponse;
-import conference.db.RoomEntity;
 import conference.repositories.RoomRepo;
 import conference.service.schedule.ScheduleControllerService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,7 @@ public class MainControllerServiceImpl implements MainControllerService {
     private final RoomRepo roomRepo;
 
     @Override
-    public List<ScheduleGetResponse> getAllScheduleByRoom(){
+    public List<ScheduleGetResponse> getAllScheduleByRoom() {
         var listRoom = roomRepo.findAll().stream().map(p -> p.getNumber()).distinct().collect(Collectors.toList());
         List<ScheduleGetResponse> list = new ArrayList<>();
         for (String roomNumber : listRoom) {

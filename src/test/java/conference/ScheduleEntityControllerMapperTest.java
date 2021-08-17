@@ -35,7 +35,7 @@ public class ScheduleEntityControllerMapperTest {
         var talkDescription = "Description";
         var talkRoomNumber = "122a";
 
-        var schedule = buildSchedule(buildTalk(title,talkDescription), talkRoomNumber, startAt, finishAt);
+        var schedule = buildSchedule(buildTalk(title, talkDescription), talkRoomNumber, startAt, finishAt);
         var expected = buildScheduleResponseDto(title, startAt, finishAt, talkDescription, talkRoomNumber, null);
 
         Assertions.assertEquals(expected, mapperTest.toResponse(schedule));

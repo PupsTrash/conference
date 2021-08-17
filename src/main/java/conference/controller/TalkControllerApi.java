@@ -19,9 +19,7 @@ public interface TalkControllerApi {
     TalkAddResponse addTalk(@RequestBody TalkAddRequest request);
 
     @PutMapping
-    TalkAddResponse editTalk(@RequestParam String title,
-                             @RequestParam String description,
-                             @RequestBody TalkAddRequest newRequest);
+    TalkAddResponse editTalk(@RequestBody TalkAddRequest request);
 
     @DeleteMapping
     void deleteTalk(@RequestBody TalkAddRequest request);

@@ -21,7 +21,7 @@ public class ValidationErrorHandler {
     public ResponseEntity<List<ErrorValid>> handleError(MethodArgumentNotValidException ex) {
 
         var err = ex.getBindingResult().getFieldErrors().stream().map(
-                it -> new ErrorValid(it.getField(), it.getDefaultMessage()))
+                        it -> new ErrorValid(it.getField(), it.getDefaultMessage()))
                 .collect(Collectors.toList());
 
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
@@ -34,10 +34,6 @@ public class ValidationErrorHandler {
         var err = ex.getConstraintViolations().stream()
                 .map(it -> new ErrorValid(it.getPropertyPath().toString(), it.getMessage()))
                 .collect(Collectors.toList());
-
-//        var err = ex.getBindingResult().getFieldErrors().stream().map(
-//                it -> new ErrorValid(it.getField(), it.getDefaultMessage()))
-//                .collect(Collectors.toList());
 
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }

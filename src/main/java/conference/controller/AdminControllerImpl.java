@@ -1,10 +1,8 @@
 package conference.controller;
 
 import conference.controller.api.AdminDto;
-import conference.db.UserEntity;
 import conference.service.admin.AdminControllerService;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 public class AdminControllerImpl implements AdminControllerApi {
-    AdminControllerService service;
+    private final AdminControllerService service;
 
 
     @Override
@@ -31,7 +29,7 @@ public class AdminControllerImpl implements AdminControllerApi {
     }
 
     @Override
-    public void deleteUser(Long id) {
-service.deleteUser(id);
+    public void deleteUser(AdminDto request) {
+        service.deleteUser(request.getId());
     }
 }

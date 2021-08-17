@@ -16,40 +16,6 @@ public class ScheduleEntityValidatorTest {
 
     private final ScheduleValidator validator = new ScheduleValidator();
 
-
-    @ParameterizedTest
-    @MethodSource(value = "invalidSources")
-    public void invalidDatesTest(LocalDateTime start, LocalDateTime finish) {
-        var item = new ScheduleEntity();
-        var request = new ScheduleEntity();
-
-        item.setStartAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 0)));
-        item.setFinishAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0)));
-
-        request.setStartAt(start);
-        request.setFinishAt(finish);
-
-        Assertions.assertEquals(false, validator.isScheduleValid(item, request));
-    }
-
-
-    @ParameterizedTest
-    @MethodSource(value = "validSources")
-    public void validDatesTest(LocalDateTime start, LocalDateTime finish) {
-        var item = new ScheduleEntity();
-        var request = new ScheduleEntity();
-
-        item.setStartAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 0)));
-        item.setFinishAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0)));
-
-        request.setStartAt(start);
-        request.setFinishAt(finish);
-
-        Assertions.assertEquals(true, validator.isScheduleValid(item, request));
-    }
-
-
-
     public static Stream<Arguments> invalidSources() {
         var invalidStart1 = LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 1));
         var invalidFinish1 = LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0));
@@ -68,8 +34,9 @@ public class ScheduleEntityValidatorTest {
                 Arguments.of(invalidStart2, invalidFinish2),
                 Arguments.of(invalidStart3, invalidFinish3),
                 Arguments.of(invalidStart4, invalidFinish4)
-                );
+        );
     }
+
     public static Stream<Arguments> validSources() {
         var validStart1 = LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(11, 1));
         var validFinish1 = LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(11, 59));
@@ -80,6 +47,36 @@ public class ScheduleEntityValidatorTest {
         return Stream.of(
                 Arguments.of(validStart1, validFinish1),
                 Arguments.of(validStart2, validFinish2)
-                );
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "invalidSources")
+    public void invalidDatesTest(LocalDateTime start, LocalDateTime finish) {
+        var item = new ScheduleEntity();
+        var request = new ScheduleEntity();
+
+        item.setStartAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 0)));
+        item.setFinishAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0)));
+
+        request.setStartAt(start);
+        request.setFinishAt(finish);
+
+        Assertions.assertEquals(false, validator.isScheduleValid(item, request));
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "validSources")
+    public void validDatesTest(LocalDateTime start, LocalDateTime finish) {
+        var item = new ScheduleEntity();
+        var request = new ScheduleEntity();
+
+        item.setStartAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 0)));
+        item.setFinishAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0)));
+
+        request.setStartAt(start);
+        request.setFinishAt(finish);
+
+        Assertions.assertEquals(true, validator.isScheduleValid(item, request));
     }
 }

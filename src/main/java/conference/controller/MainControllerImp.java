@@ -13,7 +13,7 @@ public class MainControllerImp implements MainControllerApi {
     private final MainControllerService mainControllerService;
 
     @Override
-    public List<ScheduleGetResponse> main(){
-       return mainControllerService.getAllScheduleByRoom();
+    public List<ScheduleGetResponse> main() {
+        return mainControllerService.getAllScheduleByRoom();
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 public abstract class TalkControllerServiceMapper {
 
     public abstract TalkEntity toEntity(TalkAddRequest request);
+
     public abstract List<TalkAddResponse> toResponse(List<TalkEntity> entity);
 
     public abstract TalkAddResponse toResponse(TalkEntity entity);

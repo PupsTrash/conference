@@ -7,7 +7,6 @@ import conference.service.schedule.ScheduleControllerService;
 import conference.validation.constraints.Secondary;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ScheduleControllerImpl implements ScheduleControllerApi {
 
     private final ScheduleControllerService service;
-//    private final ScheduleRepo scheduleRepo;
-//    private final TalkRepo talkRepo;
 
 
     @Override
@@ -26,41 +23,24 @@ public class ScheduleControllerImpl implements ScheduleControllerApi {
     }
 
     @Override
-    public ScheduleGetResponse getSchedulesByRoom(@RequestParam String number) {
+    public ScheduleGetResponse getSchedulesByRoom(String number) {
         return service.getScheduleByRoom(number);
     }
 
     @Override
     public ScheduleAddResponse addSchedule(AddScheduleRequest request) {
-        return service.addSchedule(request);
+        return service.editAndAddSchedule(request);
     }
 
     @Override
     public ScheduleAddResponse editSchedule(AddScheduleRequest request) {
-        return service.addSchedule(request);
+        return service.editAndAddSchedule(request);
     }
 
-//    @PostMapping
-//    public List<Schedule> addSchedule(@RequestParam(name = "title") String title,
-//                                      @RequestParam(name = "description") String description,
-//                                      @RequestParam(name = "start_at", required = false) LocalDateTime startAt,
-//                                      @RequestParam(name = "finish_at", required = false) LocalDateTime finishAt,
-//                                      @RequestParam(name = "room_id") String  roomNumber
-//                                      ) {
-//        Talk talk = new Talk();
-//        talk.setTitle(title);
-//        talk.setDescription(description);
-//        talk.setStartAt(startAt);
-//        talk.setFinishAt(finishAt);
-//
-//        Room room = new Room();
-//        room.setNumber(roomNumber);
-//
-//        Schedule schedule = new Schedule();
-//        schedule.setTalk(talk);
-//        schedule.setRoom(room);
-//        scheduleRepo.save(schedule);
-//        final List<Schedule> all = scheduleRepo.findAll();
-//        return all;
-//    }
+    @Override
+    public void deleteSchedule(AddScheduleRequest request) {
+        service.deleteSchedule(request.getId());
+    }
+
+
 }

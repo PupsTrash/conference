@@ -19,8 +19,8 @@ public abstract class AdminControllerServiceMapper {
     @Mapping(target = "role", source = "roles", qualifiedByName = "userRoleEntityToSet")
     public abstract AdminDto toResponse(UserEntity userEntity);
 
-@Named("userRoleEntityToSet")
-    public Set<String> userRoleEntityToSet(Set<RoleEntity> roleEntity){
+    @Named("userRoleEntityToSet")
+    public Set<String> userRoleEntityToSet(Set<RoleEntity> roleEntity) {
         return roleEntity.stream().map(p -> p.getHkey()).collect(Collectors.toSet());
     }
 

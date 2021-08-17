@@ -4,6 +4,7 @@ import conference.controller.api.RoomDto;
 import conference.db.RoomEntity;
 
 import java.util.List;
+
 /**
  * main method`s Room Service for Room controller
  */

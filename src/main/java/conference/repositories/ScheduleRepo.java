@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface ScheduleRepo extends JpaRepository<ScheduleEntity, Long> {
     List<ScheduleEntity> findScheduleEntityByRoomEntity_NumberOrderByStartAt(String number);
+
     List<ScheduleEntity> findScheduleEntityByRoomEntity(RoomEntity roomEntity);
 
 }
