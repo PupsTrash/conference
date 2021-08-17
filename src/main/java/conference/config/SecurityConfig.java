@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/*").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
-                .antMatchers("/api/v1/registration/**").permitAll()
+                .antMatchers("/api/v1/registration/**").anonymous()
                 .antMatchers("/schedule").hasAnyRole("SPEAKER", "ADMIN")
 
 

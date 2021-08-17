@@ -1,7 +1,9 @@
 package conference;
 
+import conference.controller.api.AddScheduleRequest;
 import conference.db.ScheduleEntity;
 import conference.service.schedule.ScheduleValidator;
+import conference.validation.constraints.OverlapTimeCheckImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -10,11 +12,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ScheduleEntityValidatorTest {
 
     private final ScheduleValidator validator = new ScheduleValidator();
+
+    private final OverlapTimeCheckImpl v = new OverlapTimeCheckImpl();
 
     public static Stream<Arguments> invalidSources() {
         var invalidStart1 = LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 1));
@@ -54,7 +59,7 @@ public class ScheduleEntityValidatorTest {
     @MethodSource(value = "invalidSources")
     public void invalidDatesTest(LocalDateTime start, LocalDateTime finish) {
         var item = new ScheduleEntity();
-        var request = new ScheduleEntity();
+        var request = new AddScheduleRequest();
 
         item.setStartAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 0)));
         item.setFinishAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0)));
@@ -62,14 +67,14 @@ public class ScheduleEntityValidatorTest {
         request.setStartAt(start);
         request.setFinishAt(finish);
 
-        Assertions.assertEquals(false, validator.isScheduleValid(item, request));
+        Assertions.assertEquals(false, v.isValidTime(request, List.of(item)));
     }
 
     @ParameterizedTest
     @MethodSource(value = "validSources")
     public void validDatesTest(LocalDateTime start, LocalDateTime finish) {
         var item = new ScheduleEntity();
-        var request = new ScheduleEntity();
+        var request = new AddScheduleRequest();
 
         item.setStartAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 0)));
         item.setFinishAt(LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(13, 0)));
@@ -77,6 +82,6 @@ public class ScheduleEntityValidatorTest {
         request.setStartAt(start);
         request.setFinishAt(finish);
 
-        Assertions.assertEquals(true, validator.isScheduleValid(item, request));
+        Assertions.assertEquals(true, v.isValidTime(request, List.of(item)));
     }
 }
