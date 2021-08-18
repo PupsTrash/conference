@@ -13,8 +13,7 @@ import java.util.List;
 public interface MainControllerApi {
 
     /**
-     *
-     * @return list schedule grouped by room with ordering by startAt
+     * @return schedule list grouped by room with ordering by startAt
      */
     @GetMapping
     List<ScheduleGetResponse> main();
