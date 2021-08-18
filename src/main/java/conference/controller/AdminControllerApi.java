@@ -10,26 +10,18 @@ import java.util.List;
  * this controller allows you to update, change user data and add or delete user
  */
 
-@Tag(name = "admin controller", description = "Common logic with admin for management users.")
+@Tag(name = "admin controller", description = "Common logic with admin for user management.")
 @RequestMapping("/admin")
 public interface AdminControllerApi {
 
     @PostMapping
     AdminDto addUser(@RequestBody AdminDto user);
 
-
-    /**
-     * list all users with user data
-     * @return
-     */
     @GetMapping
     List<AdminDto> getAllUsers();
 
-
     @PutMapping
     AdminDto editUser(@RequestBody AdminDto editData);
-
-
 
     @DeleteMapping
     void deleteUser(@RequestBody AdminDto request);
