@@ -1,4 +1,4 @@
-package conference.validation.constraints;
+package conference.validation.constraints.caseVerification;
 
 import conference.controller.api.AddScheduleRequest;
 import conference.db.ScheduleEntity;

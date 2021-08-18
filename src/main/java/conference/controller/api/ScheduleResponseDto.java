@@ -7,11 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
-// TALK
-// start, finish, talkTitle, talkDescription, talkRoomNumber
-// 112a
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,7 +26,6 @@ public class ScheduleResponseDto {
 
     @Schema(example = "122a")
     private String roomNumber;
-
 
     private Long id;
 }

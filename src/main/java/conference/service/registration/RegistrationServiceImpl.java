@@ -1,4 +1,4 @@
-package conference.service;
+package conference.service.registration;
 
 import conference.controller.api.RegistrationRequestDto;
 import conference.db.UserEntity;
@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class RegistrationService {
+public class RegistrationServiceImpl implements RegistrationService {
     private final PasswordEncoder passwordEncoder;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
 
+    @Override
     public void register(RegistrationRequestDto request) {
         var user = new UserEntity();
         user.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -24,12 +25,6 @@ public class RegistrationService {
         var userRole = user.getRoles();
         userRole.add(listenerRole);
 
-        var saved = userRepository.save(user);
-
-        var a = userRepository.findAll().stream().findFirst().get(); //wtf?
-        var b = a.getRoles().stream().findFirst().orElse(null);
-        System.out.println();
-
-
+        userRepository.save(user);
     }
 }

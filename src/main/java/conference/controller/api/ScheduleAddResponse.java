@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 
 @Data
 public class ScheduleAddResponse {
-    @Schema(example = "2021-01-31T11:01:55")
+    @Schema(example = "2021-01-31 11:01")
     private LocalDateTime startAt;
 
-    @Schema(example = "2021-01-31T12:30:01")
+    @Schema(example = "2021-01-31 12:30")
     private LocalDateTime finishAt;
 
     @Schema(example = "JUG.ru java")

@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 
 public class TalkAddRequest {
+
     @Schema(example = "JUG.ru java")
     private String title;
 

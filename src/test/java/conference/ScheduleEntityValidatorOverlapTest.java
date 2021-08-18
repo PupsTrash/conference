@@ -2,8 +2,7 @@ package conference;
 
 import conference.controller.api.AddScheduleRequest;
 import conference.db.ScheduleEntity;
-import conference.service.schedule.ScheduleValidator;
-import conference.validation.constraints.OverlapTimeCheckImpl;
+import conference.validation.constraints.caseVerification.OverlapTimeCheckImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,11 +14,9 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ScheduleEntityValidatorTest {
+public class ScheduleEntityValidatorOverlapTest {
 
-    private final ScheduleValidator validator = new ScheduleValidator();
-
-    private final OverlapTimeCheckImpl v = new OverlapTimeCheckImpl();
+    private final OverlapTimeCheckImpl validator = new OverlapTimeCheckImpl();
 
     public static Stream<Arguments> invalidSources() {
         var invalidStart1 = LocalDateTime.of(LocalDate.of(2020, 1, 1), LocalTime.of(12, 1));
@@ -67,7 +64,7 @@ public class ScheduleEntityValidatorTest {
         request.setStartAt(start);
         request.setFinishAt(finish);
 
-        Assertions.assertEquals(false, v.isValidTime(request, List.of(item)));
+        Assertions.assertEquals(false, validator.isValidTime(request, List.of(item)));
     }
 
     @ParameterizedTest
@@ -82,6 +79,6 @@ public class ScheduleEntityValidatorTest {
         request.setStartAt(start);
         request.setFinishAt(finish);
 
-        Assertions.assertEquals(true, v.isValidTime(request, List.of(item)));
+        Assertions.assertEquals(true, validator.isValidTime(request, List.of(item)));
     }
 }

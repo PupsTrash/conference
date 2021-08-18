@@ -3,6 +3,7 @@ package conference.validation.constraints;
 import conference.controller.api.AddScheduleRequest;
 import conference.repositories.RoomRepo;
 import conference.repositories.ScheduleRepo;
+import conference.validation.constraints.caseVerification.CheckAddScheduleRequestTime;
 import lombok.AllArgsConstructor;
 
 import javax.validation.ConstraintValidator;
@@ -24,7 +25,7 @@ public class ScheduleTimetableValidator implements ConstraintValidator<ScheduleT
         final var room = roomRepo.findById(value.getRoomId()).orElseThrow();
         final var list = new ArrayList<>(scheduleRepo.findScheduleEntityByRoomEntity(room));
         if (value.getId() != null) {
-            list.removeIf(p -> p.getId() == value.getId());
+            list.removeIf(p -> p.getId().equals(value.getId()));
         }
         return requests.stream().allMatch(item -> item.isValidTime(value, list));
     }

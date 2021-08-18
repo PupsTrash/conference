@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/talk").hasAnyRole("SPEAKER", "ADMIN")
                 .antMatchers("/room").hasAnyRole("SPEAKER", "ADMIN")
                 .antMatchers("/main").permitAll();
-        http.authorizeRequests().anyRequest().hasRole("ADMIN"); //не работает лол
+        http.authorizeRequests().anyRequest().hasRole("ADMIN");
 
         http.httpBasic();
         http.csrf().disable();

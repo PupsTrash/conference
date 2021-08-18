@@ -26,11 +26,6 @@ public class UserEntity implements UserDetails {
 
     private String password;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private List<UserRoleEntity> roles = new ArrayList<>();
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -42,8 +37,6 @@ public class UserEntity implements UserDetails {
     @Override
     @Transactional
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        var a = roles;
-        //var b = roles.stream().map(UserRoleEntity::getRole).collect(Collectors.toList());
         return roles;
     }
 

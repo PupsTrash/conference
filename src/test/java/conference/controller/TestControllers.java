@@ -20,12 +20,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TestAdministrativeController {
+public class TestControllers {
     @Autowired
     MockMvc mockMvc;
 
     @Autowired
-    AdministrativeController controller;
+    AdministrativeControllerApi controller;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -34,7 +34,9 @@ public class TestAdministrativeController {
     @WithAnonymousUser
     public void testAccess() throws Exception {
 
-        var dto = new RegistrationRequestDto("testcase", "1");
+        var dto = new RegistrationRequestDto();
+        dto.setUsername("testcase");
+        dto.setPassword("1");
         var request = objectMapper.writeValueAsString(dto);
 
         this.mockMvc.perform(post("/api/v1/registration/register").content(request).contentType(MediaType.APPLICATION_JSON))

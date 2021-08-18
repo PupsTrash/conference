@@ -14,6 +14,7 @@ import java.util.List;
 public class TalkControllerImpl implements TalkControllerApi {
     private final TalkControllerService service;
 
+
     @Override
     public List<TalkAddResponse> getAllTalk() {
         return service.getAllTalk();
@@ -28,7 +29,6 @@ public class TalkControllerImpl implements TalkControllerApi {
     public TalkAddResponse editTalk(TalkAddRequest request) {
         return service.editTalk(request);
     }
-
 
     @Override
     public void deleteTalk(TalkAddRequest request) {

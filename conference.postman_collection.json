@@ -1,0 +1,635 @@
+{
+	"info": {
+		"_postman_id": "743e3c61-3d7e-49d9-b2e4-25e1764fcc3e",
+		"name": "pups",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Main",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/main",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"main"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET AllTalk",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/talk",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"talk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /talk",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"testTitlePost\",\r\n    \"description\":\"testDescriptionPost\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/talk",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"talk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Talk",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"title\": \"testEdit\",\r\n        \"description\": \"testEditDescriptionPost\",\r\n        \"id\":\"4\"\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/talk?title=testTitlePost&description=testDescriptionPost",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"talk"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "testTitlePost"
+						},
+						{
+							"key": "description",
+							"value": "testDescriptionPost"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE talk",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"testEdit\",\r\n    \"description\": \"testEditDescriptionPost\",\r\n    \"id\": \"4\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/talk",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"talk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALLschedule",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/schedule",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"schedule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /schedule AddSchedule",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"talkId\": \"1\",\r\n    \"startAt\": \"2021-08-19 10:00\",\r\n    \"finishAt\": \"2021-08-19 19:00\",\r\n    \"roomId\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/schedule",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"schedule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Schedule  edit by id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "2",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"talkId\": \"1\",\r\n    \"startAt\": \"2021-08-19 09:00\",\r\n    \"finishAt\": \"2021-08-19 12:00\",\r\n    \"roomId\": \"1\",\r\n    \"id\": \"4\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/schedule",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"schedule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /schedule/byRoom_number",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/schedule/byRoom?number=5",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"schedule",
+						"byRoom"
+					],
+					"query": [
+						{
+							"key": "number",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL schedule by id",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "spk",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "2",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \"talkId\": \"1\",\r\n    \"startAt\": \"2021-08-17 19:30\",\r\n    \"finishAt\": \"2021-08-17 12:00\",\r\n    \"roomId\": \"1\",\r\n    \"id\":\"5\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/schedule",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"schedule"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST registr",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"q\",\r\n    \"password\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/api/v1/registration/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"registration",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET AllRoom",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "2",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "spk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/room",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"room"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Admin get list all users",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"admin"
+					]
+				},
+				"description": "return list users"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Admin add new user",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"checkAdd\",\r\n    \"password\": \"9\",\r\n    \"role\": [\r\n        \"SPEAKER\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Admin edit user data",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"4\",\r\n    \"username\": \"changePups\",\r\n    \"password\": \"123\",\r\n    \"role\": [\r\n        \"SPEAKER\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL Admin delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":3}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/admin",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "1",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

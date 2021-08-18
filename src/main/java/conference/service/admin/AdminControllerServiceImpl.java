@@ -27,13 +27,13 @@ public class AdminControllerServiceImpl implements AdminControllerService {
         user.setRoles(getValidRoleSet(request));
         user.setUsername(request.getUsername());
         user.setPassword(encoder.encode(request.getPassword()));
+
         return mapper.toResponse(userRepository.save(user));
     }
 
     @Override
     public List<AdminDto> getAllUsers() {
-        var a = userRepository.findAll().stream().findAny();
-        var b = a.get().getRoles().stream().findFirst();
+
         return mapper.toResponse(userRepository.findAll());
     }
 
@@ -43,7 +43,8 @@ public class AdminControllerServiceImpl implements AdminControllerService {
         var user = userRepository.findById(editData.getId()).orElseThrow();
         user.setRoles(getValidRoleSet(editData));
         user.setUsername(editData.getUsername());
-        user.setPassword(encoder.encode(editData.getPassword())); //need encrypt
+        user.setPassword(encoder.encode(editData.getPassword()));
+
         return mapper.toResponse(userRepository.save(user));
     }
 
@@ -57,10 +58,10 @@ public class AdminControllerServiceImpl implements AdminControllerService {
         var listRoles = roleRepository.findAll();
         var correctRoleName = listRoles.stream().map(p -> p.getHkey()).collect(Collectors.toSet());
         correctRoleName.retainAll(editData.getRole());
-
         var roleEntities = listRoles.stream()
                 .filter(p -> correctRoleName.contains(p.getHkey()))
                 .collect(Collectors.toSet());
+
         return roleEntities;
     }
 }

@@ -1,5 +1,8 @@
 package conference.validation.constraints;
 
+import conference.validation.group.Primary;
+import conference.validation.group.Secondary;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import javax.validation.constraints.NotNull;

@@ -3,7 +3,7 @@ package conference.controller.api;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import conference.service.schedule.Marker;
 import conference.validation.constraints.ScheduleTimetableValidation;
-import conference.validation.constraints.Secondary;
+import conference.validation.group.Secondary;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -16,12 +16,12 @@ import java.time.LocalDateTime;
 public class AddScheduleRequest {
 
     @NotNull
-    @Schema(example = "2021-08-07T15:05")
+    @Schema(example = "2021-08-07 15:05")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startAt;
 
     @NotNull
-    @Schema(example = "2021-08-07T16:05")
+    @Schema(example = "2021-08-07 16:05")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime finishAt;
 

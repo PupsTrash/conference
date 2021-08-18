@@ -4,7 +4,7 @@ import conference.controller.api.AddScheduleRequest;
 import conference.controller.api.ScheduleAddResponse;
 import conference.controller.api.ScheduleGetResponse;
 import conference.service.schedule.ScheduleControllerService;
-import conference.validation.constraints.Secondary;
+import conference.validation.group.Secondary;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Validated({Secondary.class})
 public class ScheduleControllerImpl implements ScheduleControllerApi {
-
     private final ScheduleControllerService service;
 
 

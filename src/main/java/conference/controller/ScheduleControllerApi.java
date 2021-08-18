@@ -4,7 +4,7 @@ import conference.controller.api.AddScheduleRequest;
 import conference.controller.api.ScheduleAddResponse;
 import conference.controller.api.ScheduleGetResponse;
 import conference.service.schedule.Marker;
-import conference.validation.constraints.Secondary;
+import conference.validation.group.Secondary;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +20,6 @@ public interface ScheduleControllerApi {
 
     @GetMapping("/byRoom")
     ScheduleGetResponse getSchedulesByRoom(@RequestParam String number);
-
-
 
     @PostMapping
     @Validated({Marker.OnCreate.class, Secondary.class})
