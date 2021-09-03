@@ -1,8 +1,8 @@
-#Conference test task
+# Conference test task
 ***
-###Technologies used: Spring Boot, Spring Data Jpa (in memory db, autofill),Spring Security, Spring Mvc, Gradle, jUnit, Docker, Flyway
+### Technologies used: Spring Boot, Spring Data Jpa (in memory db H2, autofill), Spring Security, Spring Mvc, Gradle, jUnit, Docker, Flyway, Swagger
 ***
-##The task
+## The task
 Create a web application "Conference".
 
 The user must be able to register for the conference and view the talks.
@@ -11,7 +11,8 @@ It is necessary to provide that the reports do not overlap each
 other in time in the same room, i.e. there cannot be 2 lectures in the 
 room at the same time. The schedule must also be accessible via the REST API.
 
-###Roles: Administrator, Speaker, Listener
+### Roles:
+Administrator, Speaker, Listener
 
 ### Pages:
 - main - contains the schedule of talks, broken down by room.
@@ -23,7 +24,7 @@ _Only the administrator can make presenters out of users._
 - You don't have to create a CRUD page for ROOM, just fill it in at the start of the application
 
 
->Postman collection in main package
+> Postman collection in main package
 conference.postman_collection.json
 
 
